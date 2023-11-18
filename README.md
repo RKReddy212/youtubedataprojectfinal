@@ -10,14 +10,14 @@ Using libraries in this project:
 ***import pandas as pd--
   To view data in dataframe.
 ***import pymongo--
-   To connect MONGODB
+   To connect MONGODB.
 ***import mysql.connector--
-   To connect MYSQL workbench(localhost)
+   To connect MYSQL workbench(localhost).
 ***import googleapiclient.discovery--
-   To connect google servers
+   To connect google servers.
 ***from googleapiclient.discovery import build--
-  Creating build function to get data from youtube using API key
+  Creating build function to get data from youtube using API key.
 ***from datetime import timedelta--
-   To calculate total duration of videos and calculate average duration of video in every channel
+   To calculate total duration of videos and calculate average duration of video in every channel.
 
    
