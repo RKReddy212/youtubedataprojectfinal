@@ -497,13 +497,13 @@ if option ==  "Questions":
 
 
     def convert_iso_duration_to_seconds(duration_str):
-        # Remove the 'PT' prefix from the duration string
+        
         duration_str = duration_str[2:]
         
-        # Parse the duration string to a timedelta object
+        
         duration = timedelta()
 
-        # Extract hours, minutes, and seconds from the duration string
+        
         if 'H' in duration_str:
             hours, duration_str = duration_str.split('H')
             if hours:
@@ -519,33 +519,33 @@ if option ==  "Questions":
             if seconds:
                 duration += timedelta(seconds=int(seconds))
 
-        # Convert total duration to seconds
+       
         duration_seconds = duration.total_seconds()
 
         return duration_seconds
 
     def calculate_average_durations():
-        # Establish database connection
+        
         conn = mysql.connector.connect(host='localhost', user='root', password='Rkr2298', autocommit=True, auth_plugin='mysql_native_password', charset="utf8mb4")
         mycursor = conn.cursor()
         mycursor.execute("USE Youtubechanneldetails")
 
-        # Execute the SQL query
+        
         query = "SELECT video_duration, channel_name FROM video_data"
         mycursor.execute(query)
         video_data = mycursor.fetchall()
 
-        # Dictionary to store total duration and count for each channel
+        
         channel_durations = {}
         channel_counts = {}
 
-        # Iterate through the video data
+        
         for duration_str, channel_name in video_data:
-            # Convert ISO duration to total seconds
+            
             try:
                 duration_seconds = convert_iso_duration_to_seconds(duration_str)
 
-                # Update total duration and count for the channel
+               
                 if channel_name in channel_durations:
                     channel_durations[channel_name] += duration_seconds
                     channel_counts[channel_name] += 1
@@ -555,13 +555,13 @@ if option ==  "Questions":
             except ValueError as e:
                 print(f"Error processing duration '{duration_str}': {e}")
 
-        # Calculate average duration for each channel
+       
         average_durations = {}
         for channel in channel_durations:
             total_duration = channel_durations[channel]
             count = channel_counts[channel]
             
-            # Check if count is not zero before calculating average
+            
             if count != 0:
                 average_seconds = total_duration / count
                 average_duration = timedelta(seconds=average_seconds)
@@ -569,14 +569,13 @@ if option ==  "Questions":
             else:
                 average_durations[channel] = "00:00:00"
 
-        # Close the database connection
+        
         mycursor.close()
         conn.close()
 
         return average_durations
 
-    # Example usage:
-    # Example usage:
+   
     result = calculate_average_durations()
     result_df = pd.DataFrame(list(result.items()), columns=['Channel', 'Average Duration'])
     
@@ -641,8 +640,7 @@ if option ==  "Questions":
                     st.dataframe(df)
                     
     execute_query(questions)
-    st.balloons() #st.success("Successfully Done",icon="✅")
-
+    st.balloons() 
 
 
 
